@@ -17,35 +17,33 @@
 <body>
    
 <div class="container">
-     
-       <div class="row" style="margin-top: 50px">
-           
-            <div class="col-sm-4"></div>
-           
-            <div class="col-sm-4">
-                 <form class="form-signin" method="POST">
-                
+    <div class="row" style="margin-top: 50px">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <form class="form-signin" method="POST">
                 <h2 class="form-signin-heading">Please Login</h2>
-            <div class="form-group">
-		  <!--<span class="input-group-addon" id="basic-addon1">@</span>-->
-                <label for="name">Username</label>
-		  <input type="text" name="username" class="form-control" placeholder="Username" required>
-		</div>
                 <div class="form-group">
 		  <!--<span class="input-group-addon" id="basic-addon1">@</span>-->
-                <label for="inputPassword">Password</label>
-		  <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                    <label for="name">Username</label>
+                    <input type="text" name="username" class="form-control" placeholder="Username" required>
+		</div>
+                <input type="hidden" name="action" value="Login">
+                <input type="hidden" name="method" value="doLogin">
+                <div class="form-group">
+		  <!--<span class="input-group-addon" id="basic-addon1">@</span>-->
+                    <label for="inputPassword">Password</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
 		</div>
                 <button class="btn btn-md btn-primary " type="submit">Login</button>
                 
-                <a class="pull-right" href="register.php">Register</a>
+                <a class="pull-right" href="index.php?action=Login&method=register">Register</a>
                       </form>
                 <div class="form-group">
                 <?php if(isset($smsg)){ ?><div class="alert alert-success alert-dismissible" > <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><?php echo $smsg; ?> </div><?php } ?>
                 <?php if(isset($fmsg)){ ?><div class="alert alert-danger alert-dismissible" ><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> <?php echo $fmsg; ?> </div><?php } ?>
                 </div>
-                </div>
-            <div class="col-sm-4">
+         </div>
+         <div class="col-sm-4">
                 
             </div>
         </div>
