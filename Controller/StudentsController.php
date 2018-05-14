@@ -1,9 +1,21 @@
 <?php
     require_once 'Model/StudentsService.php';
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
+    
+    class StudentsController{
+        private $studentsService=Null;
+        
+        function __construct() {
+            $this->studentsService=new StudentsService;
+        }
+        
+         function listStudents(){
+               // echo "dskfjdsjf";
+                $students=$this->studentsService->getAllStudents();
+                include 'View/TeacherDashboardView.php';
+            }
+        
+        
+        
+    }
 ?>

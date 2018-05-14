@@ -3,7 +3,7 @@
 class Connection{
 
      public function openDb() {
-         echo "connection is open";
+         //echo "connection is open";
         if (!mysql_connect("127.0.0.1:3307", "root", "")) {
             throw new Exception("Connection to the database server failed!");
         }

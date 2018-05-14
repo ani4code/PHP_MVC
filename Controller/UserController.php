@@ -1,15 +1,18 @@
 <?php
 require_once 'Model/RegisterService.php';
 require_once 'Model/LoginService.php';
-
+require_once 'Model/StudentsService.php';
+require_once 'Controller/StudentsController.php';
 class UserController{
     
     private $registerService=null;
     private $loginService=null;
+    private $studentsController=null;
     
     public function __construct() {
         $this->registerService= new RegisterService();
         $this->loginService= new LoginService();
+        $this->studentsController= new StudentsController();
     }
     
      public function redirect($location) {
@@ -23,9 +26,9 @@ class UserController{
            $this->register();
        }elseif ($method=='login') {//action=Login,method=login
             $this->login();
-        }elseif ($method=='doRegister'){
+        }elseif ($method=='doRegister'){//action=Login, method=doRegister
             $this->doRegister();
-        }elseif ($method=='doLogin'){
+        }elseif ($method=='doLogin'){//action=Login, method=doAction
             $this->doLogin();
         } 
             
@@ -73,16 +76,31 @@ class UserController{
             if(isset($_POST['action'])){
                 $name= isset($_POST['username'])?$_POST['username']:NULL;
                 $password= isset($_POST['password'])?md5($_POST['password']):NULL;
-                $count= $this->loginService->loginUser($name,$password);
-                if ($count==1){
+                $dash= $this->loginService->loginUser($name,$password);
+                if ($dash[0]=="teacher" && $dash[1]==1){
+                    $this->studentsController->listStudents();
                     //header("location: View/TeacherDashboardView.php");
-                    $this->redirect('View/TeacherDashboardView.php');
-                }else{
-                    echo "Invalid Username/Password";
+//                if ($count==1){
+//                    //header("location: View/TeacherDashboardView.php");
+//                    $this->redirect('View/TeacherDashboardView.php');
+//                }else{
+//                    echo "Invalid Username/Password";
 		//$fmsg = "Invalid Username/Password";
-	}
+	}elseif ($dash[0]=="student" && $dash[1]==1) {
+            header("location: View/StudentDashboardView.php");
+        }else{
+            echo "Invalid Username/Password";
+        }
             }
             }
+            
+            
+           
+            
+            
+            
+            
+            
             
         }
     
