@@ -1,14 +1,15 @@
 <?php
 require_once 'Model/RegisterService.php';
-//require_once 'Model/LoginService.php';
+require_once 'Model/LoginService.php';
 
 class UserController{
     
     private $registerService=null;
-    //private $loginService=null;
+    private $loginService=null;
     
     public function __construct() {
         $this->registerService= new RegisterService();
+        $this->loginService= new LoginService();
     }
     
      public function redirect($location) {
@@ -26,9 +27,11 @@ class UserController{
             $this->doRegister();
         }elseif ($method=='doLogin'){
             $this->doLogin();
+        } 
+            
         }
            
-       }
+       
        
        function register(){
            //echo "you are in registeration page";
@@ -45,39 +48,47 @@ class UserController{
          //$errors=array();
       
            if(isset($_POST['action'])){
-              // echo "sfdsfdsfsd";
-           
-//            echo "sfdsfdsfsd";
               $name= isset($_POST['username'])?$_POST['username']:NULL;
               $email= isset($_POST['email'])?$_POST['email']:NULL;
-               $password= isset($_POST['password'])?$_POST['password']:NULL;
-              $repassword= isset($_POST['repassword'])?$_POST['repassword']:NULL;
-        //       if($password!=$repassword){
-//                return $fmsg="Error... Password do not match";
-//            }else{
-                  //echo "djfdlskjfds";
-//                $password=md5($_POST['password']);
-             // echo $name.$email.$password.$repassword;
-                  $this->registerService->saveUser($name,$email, $password );
-                   //$this->redirect('index.php');
-                   //return;
-//         
+              $password= isset($_POST['password'])?$_POST['password']:NULL;
+              $repassword= isset($_POST['confirmpassword'])?$_POST['confirmpassword']:NULL;
+              $user=isset($_POST['user'])?$_POST['user']:NULL;
+              if ($password!=$repassword){
+                  echo "Password mismatch";
+                  return;
+              }else{
+                  $password=md5($password);
+              }
+                $this->registerService->saveUser($name,$email, $password,$user );
+                $this->redirect('index.php');
+                return;      
                }
-//            
-//        }
-//            
-//            
-//           include 'view/RegisterView.php';
+          
+           include 'view/RegisterView.php';
 //             //echo "POST Register operation";
         }
     
         function doLogin(){
-            echo "POST Login operation";
+            //echo "POST Login operation";
+            if(isset($_POST['action'])){
+                $name= isset($_POST['username'])?$_POST['username']:NULL;
+                $password= isset($_POST['password'])?md5($_POST['password']):NULL;
+                $count= $this->loginService->loginUser($name,$password);
+                if ($count==1){
+                    //header("location: View/TeacherDashboardView.php");
+                    $this->redirect('View/TeacherDashboardView.php');
+                }else{
+                    echo "Invalid Username/Password";
+		//$fmsg = "Invalid Username/Password";
+	}
+            }
+            }
+            
         }
     
     
     
-}
+
 
 
 

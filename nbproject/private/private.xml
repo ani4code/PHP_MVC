@@ -6,12 +6,10 @@
             <file>file:/C:/xampp/htdocs/PHPmvc/Model/RegisterService.php</file>
             <file>file:/C:/xampp/htdocs/PHPmvc/Controller/HomeController.php</file>
             <file>file:/C:/xampp/htdocs/PHPmvc/Model/LoginService.php</file>
-            <file>file:/C:/xampp/htdocs/PHPmvc/index.php</file>
             <file>file:/C:/xampp/htdocs/PHPmvc/Controller/UserController.php</file>
+            <file>file:/C:/xampp/htdocs/PHPmvc/View/TeacherDashboardView.php</file>
             <file>file:/C:/xampp/htdocs/PHPmvc/View/RegisterView.php</file>
-            <file>file:/C:/xampp/htdocs/PHPmvc/HandleRequest.php</file>
             <file>file:/C:/xampp/htdocs/PHPmvc/View/LoginView.php</file>
-            <file>file:/C:/xampp/htdocs/PHPmvc/Controller/DashboardController.php</file>
             <file>file:/C:/xampp/htdocs/PHPmvc/Connection.php</file>
         </group>
     </open-files>

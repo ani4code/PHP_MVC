@@ -1,25 +1,37 @@
 <?php 
-//session_start();
-//require_once('connection.php');
-//if(isset($_POST) & !empty($_POST)){
-//	$username = mysqli_real_escape_string($connection, $_POST['username']);
-//	$password = md5($_POST['password']);
-//
-//	$sql = "SELECT * FROM `login` WHERE username='$username' AND password='$password'";
-//	$result = mysqli_query($connection, $sql);
-//	$count = mysqli_num_rows($result);
-//	if($count == 1){
-//		$_SESSION['username'] = $username;
-//                echo session_id();
-//                print_r($_SESSION);
-//                header("location: welcome.php");
-//	}else{
-//		$fmsg = "Invalid Username/Password";
-//	}
-//}
-//if(isset($_SESSION['username'])){
-//	$smsg = "User already logged in";
-//}
+require_once 'Connection.php';
+class LoginService{
+    private $connect=null;
+     public function __construct() {
+        $this->connect=new Connection();
+    }
 
+        
+    function loginUser($name,$password){
+       // echo $name.$password;
+        $this->connect->openDb();
+       $count= $this->validateLogin($name,$password);
+       $this->connect->closeDb();
+       return $count;   
+    }
+    
+    
+    function validateLogin($name,$password){
+       // echo $name.$password;
+       $dbName = ($name != NULL)?"'".mysql_real_escape_string($name)."'":'NULL';
+       $dbPassword = ($password != NULL)?"'".mysql_real_escape_string($password)."'":'NULL';
+       //echo $dbName.$dbPassword;
+       $rs=mysql_query("SELECT * FROM login WHERE username=$dbName AND password=$dbPassword");
+       //$sql="SELECT * FROM login WHERE username=$dbName AND password=$dbPassword";
+      // mysqli_query($sql);
+        $count = mysql_num_rows($rs);
+        //echo $count;
+        return $count;
+//        if ($count==1){
+//            header("location: View/TeacherDashboardView.php");
+//        }
+    }
+    
+}
 
 ?>

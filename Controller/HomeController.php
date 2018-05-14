@@ -2,19 +2,14 @@
 require_once 'Controller/DashboardController.php';
 require_once 'Controller/UserController.php';
 class HomeController{
-    private $dashboardController=NULL;
+    private $dashboardController=NULL;//session checking and redirecting
     private $userController=NULL;
     public function __construct() {
         $this->dashboardController=new DashboardController();
         $this->userController=new UserController();
     }
     function handleRequest(){
-
-       // echo $_GET['action'];
         if($_SERVER["REQUEST_METHOD"] == "GET"){
-                            //echo 'h';die;
-
-            //$action= isset($_GET['action'])?$_GET['action']:NULL;
              $action= isset($_GET['action'])?$_GET['action']:$_POST['action'];
             try {
             if ( !$action ) {
@@ -41,10 +36,6 @@ class HomeController{
      
     }
 }
-
-
-
-
 
 
 ?>
